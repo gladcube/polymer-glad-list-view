@@ -1,0 +1,65 @@
+link(rel="import" href="../../bower_components/polymer/polymer.html")
+link(rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html")
+link(rel="import" href="../../bower_components/iron-icon/iron-icon.html")
+link(rel="import" href="../../bower_components/iron-list/iron-list.html")
+link(rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html")
+link(rel="import" href="../../bower_components/paper-item/paper-item.html")
+link(rel="import" href="../../bower_components/glad-prelude-ls/glad-prelude-ls.html")
+link(rel="import" href="../../bower_components/glad-inflection/glad-inflection.html")
+
+dom-module#glad-list-view
+  style(is="custom-style").
+    :host {
+      @apply(--layout-fit);
+      @apply(--layout-vertical);
+    }
+    :host.is-selecting .not.selection { display: none }
+    :host:not(.is-selecting) .selection:not(.not) { display: none }
+    paper-item {
+      --paper-item-disabled: {
+        color: inherit;
+        background: inherit;
+      }
+    }
+    header {
+      min-height: 48px;
+      padding: 0 16px;
+    }
+    header .small { max-width: 2.5em }
+    header .small.center { text-align: center }
+    paper-item a {
+      color: var(--default-primary-color);
+      text-decoration: none;
+    }
+    paper-item a[has-action] { cursor: pointer; }
+    paper-item a[has-action]:hover { text-decoration: underline; }
+    paper-item a:not(:last-child) { margin-right: 0.3em; }
+    paper-item iron-icon { margin-right: 0.3em; }
+    paper-item .small { max-width: 2.5em }
+    paper-item .center { text-align: center }
+  template
+    header.layout.horizontal.center(hidden$="[[narrow]]")
+      a.flex-1.small.selection.center
+        paper-checkbox#checkbox-for-all(on-iron-change="select_or_unselect_all")
+      template(is="dom-repeat" items="[[fields]]")
+        a(class$="[[flex_class_by(item)]]") [[display_name_of(item)]]
+    iron-list.flex(selector items="[[rows]]" selected-items="{{selectedRows}}" selection-enabled multi-selection as="row")
+      template
+        paper-item
+          .flex-1.small.selection.center
+            paper-checkbox(checked="[[is_selected_by(row, selectedRows, selectedRows.length)]]")
+          template(is="dom-repeat" items="[[fields]]" as="field")
+            div(class$="col [[flex_class_by(field)]]")
+              template(is="dom-repeat" items="[[values_by(field, row)]]" as="value")
+                template(is="dom-if" if="[[icon_type_by(field, row)]]")
+                  iron-icon(icon="[[icon_type_by(field, row)]]" style$="color: [[icon_color_by(field, row)]]")
+                a(
+                  href$="[[href_by(field, row)]]"
+                  field="[[field]]"
+                  row="[[row]]"
+                  value="[[value]]"
+                  on-tap="do_the_action"
+                  style$="[[style_by(field, row)]]"
+                  class$="[[class_by(field, row)]]"
+                  has-action$="[[has_action_by(field, row)]]"
+                ) [[value]]
