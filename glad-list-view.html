@@ -58,7 +58,7 @@ GladListView = (function(){
     return this.toggleClass('is-selecting', isSelecting);
   };
   prototype.render = function(){
-    return this.$$('glad-list-view')._render();
+    return this.$$('iron-list')._render();
   };
   prototype.clear_selection = function(){
     if (this.selectedRows == null) {

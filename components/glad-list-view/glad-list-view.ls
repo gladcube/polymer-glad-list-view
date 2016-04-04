@@ -19,7 +19,7 @@ class GladListView
   toggle_class_on_changed: (is-selecting)->
     @toggle-class \is-selecting, is-selecting
   render: ->
-    @$$ \glad-list-view ._render!
+    @$$ \iron-list ._render!
   clear_selection: ->
     unless @selected-rows? => return
     @splice \selectedRows, 0, @selected-rows.length
