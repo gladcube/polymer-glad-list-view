@@ -53,12 +53,12 @@ GladListView = (function(){
       notify: true
     }
   };
-  prototype.observers = ["update_iron_list_on_changed(rows)", "toggle_class_on_changed(isSelecting)"];
-  prototype.update_iron_list_on_changed = function(rows){
-    return this.$$('iron-list')._update();
-  };
+  prototype.observers = ["toggle_class_on_changed(isSelecting)"];
   prototype.toggle_class_on_changed = function(isSelecting){
     return this.toggleClass('is-selecting', isSelecting);
+  };
+  prototype.render = function(){
+    return this.$$('glad-list-view')._render();
   };
   prototype.clear_selection = function(){
     if (this.selectedRows == null) {
