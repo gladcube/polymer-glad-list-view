@@ -14,8 +14,11 @@ class GladListView
     is-selecting:
       notify: on
   observers: [
+    "update_iron_list_on_changed(rows)"
     "toggle_class_on_changed(isSelecting)"
   ]
+  update_iron_list_on_changed: (rows)->
+    @$$ \iron-list ._update!
   toggle_class_on_changed: (is-selecting)->
     @toggle-class \is-selecting, is-selecting
   clear_selection: ->

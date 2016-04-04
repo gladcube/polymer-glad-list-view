@@ -53,7 +53,10 @@ GladListView = (function(){
       notify: true
     }
   };
-  prototype.observers = ["toggle_class_on_changed(isSelecting)"];
+  prototype.observers = ["update_iron_list_on_changed(rows)", "toggle_class_on_changed(isSelecting)"];
+  prototype.update_iron_list_on_changed = function(rows){
+    return this.$$('iron-list')._update();
+  };
   prototype.toggle_class_on_changed = function(isSelecting){
     return this.toggleClass('is-selecting', isSelecting);
   };
