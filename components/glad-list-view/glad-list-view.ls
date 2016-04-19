@@ -61,5 +61,6 @@ class GladListView
     @dom-host~(field.action)? event, field, row, value
   display_name_of: (field)->
     field.name |> camelize |> underscore |> titleize
+  header_click: (e, detail) -> @fire \glad-list-header-clicked, item:e.model.item
 |> ( .::) |> Polymer
 
