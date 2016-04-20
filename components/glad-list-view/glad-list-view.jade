@@ -42,7 +42,7 @@ dom-module#glad-list-view
       a.flex-1.small.selection.center
         paper-checkbox#checkbox-for-all(on-iron-change="select_or_unselect_all")
       template(is="dom-repeat" items="[[fields]]")
-        a(class$="[[flex_class_by(item)]]") [[display_name_of(item)]]
+        a(class$="[[flex_class_by(item)]]" on-click="header_click") [[display_name_of(item)]]
     iron-list.flex(selector items="[[rows]]" selected-items="{{selectedRows}}" selection-enabled multi-selection as="row")
       template
         paper-item
